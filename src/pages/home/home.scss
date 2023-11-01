@@ -1,0 +1,20 @@
+.home{
+ 
+    text-align: center;
+    
+    .square{
+        -webkit-box-shadow: 0px 10px 13px -7px #000000, 26px 32px 13px 9px rgba(0,0,0,0.05); 
+        box-shadow: 0px 10px 13px -7px #000000, 26px 32px 13px 9px rgba(0,0,0,0.05);
+        width: 100%; /* Defina a largura do container */
+        aspect-ratio: 1; /* Defina uma relação de aspecto 1:1 para criar um quadrado */
+        border: 1px solid #000;
+        }  
+}
+body{
+
+    background-image: url('predio-elevador-pessoa.png');
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position: center;
+    background-position-y: 400px;
+}
