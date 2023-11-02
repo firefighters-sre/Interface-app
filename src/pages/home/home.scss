@@ -1,5 +1,5 @@
 .home{
- 
+  
     text-align: center;
     
     .square{
@@ -20,11 +20,19 @@ body{
 }
 
 .status{
-    margin-top: 240px;
+    margin-top: 200px;
     margin-left: 220px;
     height: 30px;
-    width: 50px;
+    width: 50px;  
+    position: fixed;
     background-color: red;
-
+    
 }
+
+.listaevento{
+  height: 100px; /* Defina a altura fixa desejada */
+  overflow-y: auto; /* Adicione rolagem vertical quando necessário */
+}
+
+
 
