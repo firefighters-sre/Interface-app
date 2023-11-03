@@ -20,12 +20,14 @@ body{
 }
 
 .status{
-    margin-top: 200px;
-    margin-left: 220px;
+    margin-top: 200px; 
     height: 30px;
     width: 50px;  
     position: fixed;
+    left: 55%;
     background-color: red;
+    color: white;
+    
     
 }
 
@@ -34,5 +36,8 @@ body{
   overflow-y: auto; /* Adicione rolagem vertical quando necessário */
 }
 
-
-
+.elevadordesativado{
+    width: 60px;
+    margin-top: 320px;
+  
+}
