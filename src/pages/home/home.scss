@@ -1,43 +1,77 @@
-.home{
-  
-    text-align: center;
-    
-    .square{
-        -webkit-box-shadow: 0px 10px 13px -7px #000000, 26px 32px 13px 9px rgba(0,0,0,0.05); 
-        box-shadow: 0px 10px 13px -7px #000000, 26px 32px 13px 9px rgba(0,0,0,0.05);
-        width: 100%; /* Defina a largura do container */
-        aspect-ratio: 1; /* Defina uma relação de aspecto 1:1 para criar um quadrado */
-        border: 1px solid #000;
-        }  
-}
-body{
+.home {
+  text-align: center;
 
-    background-image: url('predio-elevador-pessoa.png');
-    background-repeat: no-repeat;
-    background-size: 300px;
-    background-position: center;
-    background-position-y: 400px;
+  .square {
+    -webkit-box-shadow: 0px 10px 13px -7px #000000,
+      26px 32px 13px 9px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 10px 13px -7px #000000,
+      26px 32px 13px 9px rgba(0, 0, 0, 0.05);
+    width: 100%; /* Defina a largura do container */
+    aspect-ratio: 1; /* Defina uma relação de aspecto 1:1 para criar um quadrado */
+    border: 1px solid #000;
+  }
 }
-
-.status{
-    margin-top: 200px; 
-    height: 30px;
-    width: 50px;  
-    position: fixed;
-    left: 55%;
-    background-color: red;
-    color: white;
-    
-    
+body {
+  background-image: url("predio-elevador-pessoa.png");
+  background-repeat: no-repeat;
+  background-size: 300px;
+  background-position: center;
+  background-position-y: 400px;
 }
 
-.listaevento{
+.popup {
+  height: 100%;
+  width: 100%;
+  top: 170px;
+  overflow: hidden;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10%;
+  border-color: #000;
+}
+
+.listaevento {
   height: 100px; /* Defina a altura fixa desejada */
-  overflow-y: auto; /* Adicione rolagem vertical quando necessário */
+  //overflow-y: auto; /* Adicione rolagem vertical quando necessário */
 }
 
-.elevadordesativado{
-    width: 60px;
-    margin-top: 320px;
-  
+.elevador {
+  width: 60px;
+  margin-top: 320px;
 }
+.elevadorligado {
+  position: fixed; /* Fixa o elemento na tela */
+  bottom: 0; /* Fica na parte inferior da tela */
+  right: 0; /* Fica no canto direito da tela */
+}
+
+.elevadoremchamas {
+  width: 100%;
+}
+.buttonStatus {
+  margin-top: 200px;
+  height: 30px;
+  width: 50px;
+  position: absolute;
+  left: 55%;
+  background-color: black;
+  color: white;
+}
+.metricas{
+    flex-direction: row;
+    padding: 10px;
+    background-color: #e1e1e1;
+    position: fixed;
+    right: 30px;
+    bottom: 600px;
+  }
+  
+  .valor-box {
+    
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }

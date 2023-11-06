@@ -13,7 +13,7 @@ function RoomLog() {
         }
         return newLog;
       });
-    }, 10000);
+    }, 8000);
 
     return () => {
       clearInterval(intervalId);
