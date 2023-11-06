@@ -7,6 +7,7 @@ import elevadoremchamas from "./elevador-em-chamas.png";
 import caboscortados from "./cabos-cortados.png";
 import cabosconectados from "./cabos-conectados.png";
 import problema from "./problema.png";
+import documento from "./document.png";
 
 const Home = () => {
   const [status, setStatus] = useState("Off");
@@ -19,6 +20,8 @@ const Home = () => {
   const [metricasVisiveis, setMetricasVisiveis] = useState(false);
   const [iconeProblemaVisivel, setIconeProblemaVisivel] = useState(false);
   const [novoPopupVisivel, setNovoPopupVisivel] = useState(false);
+  const [iconeDocumento, setDocumento] = useState(false);
+  const [metricpopup, setMetricPopup] = useState(false);
 
   const toggleStatus = () => {
     if (botaoAtivo) {
@@ -43,6 +46,7 @@ const Home = () => {
     setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
     setMetricasVisiveis(false);
     setIconeProblemaVisivel(true);
+    
   };
 
   const togglePopup = () => {
@@ -55,6 +59,7 @@ const Home = () => {
       setListaEventosVisible(false);
     }
   };
+  
 
   useEffect(() => {
     if (popupVisible) {
@@ -72,7 +77,11 @@ const Home = () => {
     setIconeProblemaVisivel(false);
 
   };
-
+  const fecharNovoPopup = () => {
+    setNovoPopupVisivel(false);
+    setMetricasVisiveis(true); // Reexibe as métricas
+    setDocumento(true);
+  };
   return (
     <div className="home">
       <div className="homeFContainer">
@@ -153,10 +162,12 @@ const Home = () => {
           Duas salas, denominadas ROXA e VERMELHA, foram as mais afetadas, com água acumulando rapidamente no chão. Pouco tempo depois, as luzes nestas salas começaram a piscar e um cheiro de queimado foi notado, indicando um possível curto-circuito. <br />
 
           Todos os funcionários no andar afetado foram evacuados imediatamente e a energia foi desligada por precaução às 08:21 AM. <br />
-          <button onClick={() => setNovoPopupVisivel(false)}>Fechar</button>
+          <button onClick={fecharNovoPopup} className="fecharPopup">Fechar</button>
             </div>
         )}
-          
+          {iconeDocumento &&(
+            <img src={documento} className="documento"onClick={metricpopup} />
+          )}
       </div>
     </div>
   );
