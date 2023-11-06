@@ -61,17 +61,32 @@ body {
   color: white;
 }
 .metricas{
-    flex-direction: row;
+    flex-direction: r;
     padding: 10px;
     background-color: #e1e1e1;
     position: fixed;
     right: 30px;
     bottom: 600px;
-  }
+    
+  } 
   
   .valor-box {
     
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #fff;
+    position: relative;
+
   }
+
+.problema{
+  width: 20%;
+  position: absolute;
+  right: 10%;
+}
+
+.novopopup{
+  background-color:white;
+  border-radius: 10%;
+  
+}
