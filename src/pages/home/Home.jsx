@@ -64,6 +64,14 @@ const Home = () => {
       setNovoPopupVisivel(false);
     }
   }, [popupVisible]);
+  const openPopupWithProblema = () => {
+    setNovoPopupVisivel(true);
+    setListaEventosVisible(false);
+    setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
+    setMetricasVisiveis(false);
+    setIconeProblemaVisivel(false);
+
+  };
 
   return (
     <div className="home">
@@ -126,14 +134,29 @@ const Home = () => {
           <img
             src={problema}
             className="problema"
-            onClick={() => setNovoPopupVisivel(true)}
+            onClick={openPopupWithProblema}
           />
         )}
         {novoPopupVisivel && (
           <div className="novopopup">
-        
-          </div>
+           <h2> Relatório Inicial de Incidente</h2>
+          Data: 21 de Outubro de 2023 
+          <br />
+          Hora: 15:00 PM <br />
+          Local: Prédio Principal <br />
+
+          Notificado por: Sr. João Cardoso (Funcionário do Departamento de TI) <br />
+
+          Descrição do Incidente: <br />
+          A equipe de segurança foi alertada sobre uma inundação em um dos andares do prédio. O sistema de alarme de inundação foi acionado às 08:15 AM, e as câmeras de segurança capturaram imagens de água vazando de uma das caixas d'água no corredor central. <br />
+
+          Duas salas, denominadas ROXA e VERMELHA, foram as mais afetadas, com água acumulando rapidamente no chão. Pouco tempo depois, as luzes nestas salas começaram a piscar e um cheiro de queimado foi notado, indicando um possível curto-circuito. <br />
+
+          Todos os funcionários no andar afetado foram evacuados imediatamente e a energia foi desligada por precaução às 08:21 AM. <br />
+          <button onClick={() => setNovoPopupVisivel(false)}>Fechar</button>
+            </div>
         )}
+          
       </div>
     </div>
   );
