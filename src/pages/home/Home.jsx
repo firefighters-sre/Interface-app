@@ -21,13 +21,14 @@ const Home = () => {
   const [iconeProblemaVisivel, setIconeProblemaVisivel] = useState(false);
   const [novoPopupVisivel, setNovoPopupVisivel] = useState(false);
   const [iconeDocumento, setDocumento] = useState(false);
-  const [metricpopup, setMetricPopup] = useState(false);
+  const [metricpopupVisible, setMetricPopupVisible] = useState(false);
+  const [exibirEmPorcentagem, setExibirEmPorcentagem] = useState(false);
+  const [documentoPopupVisible, setDocumentoPopupVisible] = useState(false);
 
   const toggleStatus = () => {
     if (botaoAtivo) {
       setStatus("On");
       setBotaoAtivo(false);
-      
     }
   };
 
@@ -46,7 +47,6 @@ const Home = () => {
     setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
     setMetricasVisiveis(false);
     setIconeProblemaVisivel(true);
-    
   };
 
   const togglePopup = () => {
@@ -59,7 +59,6 @@ const Home = () => {
       setListaEventosVisible(false);
     }
   };
-  
 
   useEffect(() => {
     if (popupVisible) {
@@ -75,13 +74,29 @@ const Home = () => {
     setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
     setMetricasVisiveis(false);
     setIconeProblemaVisivel(false);
-
   };
   const fecharNovoPopup = () => {
     setNovoPopupVisivel(false);
     setMetricasVisiveis(true); // Reexibe as métricas
     setDocumento(true);
+    setIconeProblemaVisivel(false);
+
   };
+  const metricpopup = () => {
+    setMetricPopupVisible(true);
+    setIconeProblemaVisivel(false);
+
+  };
+  const fecharMetricPopup = () => {
+    setMetricPopupVisible(false);
+    setIconeProblemaVisivel(false);
+
+  };
+
+  const openDocumentoPopup = () => {
+    setDocumentoPopupVisible(true);
+  };
+  
   return (
     <div className="home">
       <div className="homeFContainer">
@@ -148,26 +163,88 @@ const Home = () => {
         )}
         {novoPopupVisivel && (
           <div className="novopopup">
-           <h2> Relatório Inicial de Incidente</h2>
-          Data: 21 de Outubro de 2023 
-          <br />
-          Hora: 15:00 PM <br />
-          Local: Prédio Principal <br />
-
-          Notificado por: Sr. João Cardoso (Funcionário do Departamento de TI) <br />
-
-          Descrição do Incidente: <br />
-          A equipe de segurança foi alertada sobre uma inundação em um dos andares do prédio. O sistema de alarme de inundação foi acionado às 08:15 AM, e as câmeras de segurança capturaram imagens de água vazando de uma das caixas d'água no corredor central. <br />
-
-          Duas salas, denominadas ROXA e VERMELHA, foram as mais afetadas, com água acumulando rapidamente no chão. Pouco tempo depois, as luzes nestas salas começaram a piscar e um cheiro de queimado foi notado, indicando um possível curto-circuito. <br />
-
-          Todos os funcionários no andar afetado foram evacuados imediatamente e a energia foi desligada por precaução às 08:21 AM. <br />
-          <button onClick={fecharNovoPopup} className="fecharPopup">Fechar</button>
-            </div>
+            <h2> Relatório Inicial de Incidente</h2>
+            Data: 21 de Outubro de 2023
+            <br />
+            Hora: 15:00 PM <br />
+            Local: Prédio Principal <br />
+            Notificado por: Sr. João Cardoso (Funcionário do Departamento de TI){" "}
+            <br />
+            Descrição do Incidente: <br />
+            A equipe de segurança foi alertada sobre uma inundação em um dos
+            andares do prédio. O sistema de alarme de inundação foi acionado às
+            08:15 AM, e as câmeras de segurança capturaram imagens de água
+            vazando de uma das caixas d'água no corredor central. <br />
+            Duas salas, denominadas ROXA e VERMELHA, foram as mais afetadas, com
+            água acumulando rapidamente no chão. Pouco tempo depois, as luzes
+            nestas salas começaram a piscar e um cheiro de queimado foi notado,
+            indicando um possível curto-circuito. <br />
+            Todos os funcionários no andar afetado foram evacuados imediatamente
+            e a energia foi desligada por precaução às 08:21 AM. <br />
+            <button onClick={fecharNovoPopup} className="fecharPopup">
+              Fechar
+            </button>
+          </div>
         )}
-          {iconeDocumento &&(
-            <img src={documento} className="documento"onClick={metricpopup} />
-          )}
+        {iconeDocumento && (
+          <img src={documento} className="documento" onClick={metricpopup} />
+        )}
+        {metricpopupVisible && ( // Condicional para exibir o metricpopup
+          <div className="metricpopup">
+            <h2>Tempo médio em cada local</h2>
+            <button onClick={() => setExibirEmPorcentagem(!exibirEmPorcentagem)}>
+              Alternar Exibição
+            </button>
+            <table>
+              <thead>
+                <tr>
+                  <td>Recepção:</td>
+                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Elevador:</td>
+                  <td>{exibirEmPorcentagem ? "30%" : "2 minutos"}</td>
+                </tr>
+                <tr>
+                  <td>Escritório: </td>
+                  <td>{exibirEmPorcentagem ? "95%" : "5 horas"}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button onClick={fecharMetricPopup} className="fecharPopup">Fechar</button>
+          </div>
+        )}
+     {iconeDocumento && (
+  <img src={documento} className="documento" onClick={openDocumentoPopup} />
+)}
+{documentoPopupVisible && (
+            <div className="metricpopup">
+            <h2>Tempo médio em cada local</h2>
+            <button onClick={() => setExibirEmPorcentagem(!exibirEmPorcentagem)}>
+              Alternar Exibição
+            </button>
+            <table>
+              <thead>
+                <tr>
+                  <td>Recepção:</td>
+                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Elevador:</td>
+                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
+                </tr>
+                <tr>
+                  <td>Escritório: </td>
+                  <td>{exibirEmPorcentagem ? "95%" : "5 horas"}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button onClick={() => setDocumentoPopupVisible(false)}>Fechar</button>          </div>
+        )}
       </div>
     </div>
   );
