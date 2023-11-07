@@ -22,8 +22,9 @@ const Home = () => {
   const [novoPopupVisivel, setNovoPopupVisivel] = useState(false);
   const [iconeDocumento, setDocumento] = useState(false);
   const [metricpopupVisible, setMetricPopupVisible] = useState(false);
-  const [exibirEmPorcentagem, setExibirEmPorcentagem] = useState(false);
   const [documentoPopupVisible, setDocumentoPopupVisible] = useState(false);
+  const [exibirEmPorcentagem, setExibirEmPorcentagem] = useState(false);
+  const [displayedPopup, setDisplayedPopup] = useState("documentoPopup"); // Inicia com o documentoPopup
 
   const toggleStatus = () => {
     if (botaoAtivo) {
@@ -44,18 +45,17 @@ const Home = () => {
     setElevadorStatus("chamas");
     setPopupVisible(true);
     setListaEventosVisible(false);
-    setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
+    setBotaoAtivo(false);
     setMetricasVisiveis(false);
     setIconeProblemaVisivel(true);
   };
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible);
-    setMetricasVisiveis(true); // Exibe as métricas quando o popup é fechado
+    setMetricasVisiveis(true);
     setIconeProblemaVisivel(true);
 
     if (popupVisible) {
-      // Se o popup foi fechado, reexiba a lista de eventos
       setListaEventosVisible(false);
     }
   };
@@ -68,35 +68,44 @@ const Home = () => {
       setNovoPopupVisivel(false);
     }
   }, [popupVisible]);
+
   const openPopupWithProblema = () => {
     setNovoPopupVisivel(true);
     setListaEventosVisible(false);
-    setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
+    setBotaoAtivo(false);
     setMetricasVisiveis(false);
     setIconeProblemaVisivel(false);
   };
+
   const fecharNovoPopup = () => {
     setNovoPopupVisivel(false);
-    setMetricasVisiveis(true); // Reexibe as métricas
+    setMetricasVisiveis(true);
     setDocumento(true);
     setIconeProblemaVisivel(false);
-
-  };
-  const metricpopup = () => {
-    setMetricPopupVisible(true);
-    setIconeProblemaVisivel(false);
-
-  };
-  const fecharMetricPopup = () => {
-    setMetricPopupVisible(false);
-    setIconeProblemaVisivel(false);
-
   };
 
   const openDocumentoPopup = () => {
-    setDocumentoPopupVisible(true);
+    if (displayedPopup === "metricpopupVisible") {
+      setDocumentoPopupVisible(true);
+      setMetricPopupVisible(false);
+      setDisplayedPopup("documentoPopup");
+    } else {
+      setMetricPopupVisible(!metricpopupVisible);
+      setDocumentoPopupVisible(!documentoPopupVisible);
+    }
   };
-  
+
+  const openMetricPopup = () => {
+    if (displayedPopup === "documentoPopup") {
+      setMetricPopupVisible(true);
+      setDocumentoPopupVisible(false);
+      setDisplayedPopup("metricpopup");
+    } else {
+      setMetricPopupVisible(!metricpopupVisible);
+      setDocumentoPopupVisible(!documentoPopupVisible);
+    }
+  };
+
   return (
     <div className="home">
       <div className="homeFContainer">
@@ -163,7 +172,7 @@ const Home = () => {
         )}
         {novoPopupVisivel && (
           <div className="novopopup">
-            <h2> Relatório Inicial de Incidente</h2>
+            <h2>Relatório Inicial de Incidente</h2>
             Data: 21 de Outubro de 2023
             <br />
             Hora: 15:00 PM <br />
@@ -186,65 +195,41 @@ const Home = () => {
             </button>
           </div>
         )}
-        {iconeDocumento && (
-          <img src={documento} className="documento" onClick={metricpopup} />
-        )}
-        {metricpopupVisible && ( // Condicional para exibir o metricpopup
-          <div className="metricpopup">
-            <h2>Tempo médio em cada local</h2>
-            <button onClick={() => setExibirEmPorcentagem(!exibirEmPorcentagem)}>
-              Alternar Exibição
-            </button>
-            <table>
-              <thead>
-                <tr>
-                  <td>Recepção:</td>
-                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Elevador:</td>
-                  <td>{exibirEmPorcentagem ? "30%" : "2 minutos"}</td>
-                </tr>
-                <tr>
-                  <td>Escritório: </td>
-                  <td>{exibirEmPorcentagem ? "95%" : "5 horas"}</td>
-                </tr>
-              </tbody>
-            </table>
-            <button onClick={fecharMetricPopup} className="fecharPopup">Fechar</button>
-          </div>
-        )}
-     {iconeDocumento && (
-  <img src={documento} className="documento" onClick={openDocumentoPopup} />
-)}
-{documentoPopupVisible && (
-            <div className="metricpopup">
-            <h2>Tempo médio em cada local</h2>
-            <button onClick={() => setExibirEmPorcentagem(!exibirEmPorcentagem)}>
-              Alternar Exibição
-            </button>
-            <table>
-              <thead>
-                <tr>
-                  <td>Recepção:</td>
-                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Elevador:</td>
-                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
-                </tr>
-                <tr>
-                  <td>Escritório: </td>
-                  <td>{exibirEmPorcentagem ? "95%" : "5 horas"}</td>
-                </tr>
-              </tbody>
-            </table>
-            <button onClick={() => setDocumentoPopupVisible(false)}>Fechar</button>          </div>
-        )}
+          <div>
+    {iconeDocumento && (
+      <img src={documento} className="documento" onClick={openDocumentoPopup} />
+    )}
+    {metricpopupVisible && (
+      <div className="metricpopup">
+        <h2>Tempo médio em cada local</h2>
+        <button onClick={() => setExibirEmPorcentagem(!exibirEmPorcentagem)}>
+          Alternar Exibição
+        </button>
+        <table>
+          <thead>
+            <tr>
+              <td>Recepção:</td>
+              <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Elevador:</td>
+              <td>{exibirEmPorcentagem ? "95%" : "30segundos"}</td>
+            </tr>
+            <tr>
+              <td>Escritório: </td>
+              <td>{exibirEmPorcentagem ? "95%" : "5 horas"}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button onClick={openMetricPopup} className="fecharPopup">
+          Fechar
+        </button>
+      </div>
+    )}
+    
+  </div>
       </div>
     </div>
   );
