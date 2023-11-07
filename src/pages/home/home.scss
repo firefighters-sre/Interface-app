@@ -28,6 +28,7 @@ body {
   padding: 5px;
   border: 2px solid #333; /* Cor da borda do popup */
   border-radius: 10px; /* Raio das bordas do popup */
+  align-items: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra do popup */
 }
 
@@ -39,6 +40,7 @@ body {
 .elevador {
   width: 60px;
   margin-top: 320px;
+
 }
 .elevadorligado {
   position: fixed; /* Fixa o elemento na tela */
@@ -47,9 +49,9 @@ body {
 }
 
 .elevadoremchamas {
-  width: 100%;
-}
-.buttonStatus {
+  width: 400px;
+  text-align: center;
+}.buttonStatus {
   margin-top: 200px;
   height: 30px;
   width: 50px;
