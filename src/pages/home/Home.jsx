@@ -1,251 +1,46 @@
-import React, { useState, useEffect } from "react";
-import "./home.scss";
-import ListaEvento from "./ListaEvento.jsx";
-import elevadordesativado from "./elevador-desativado.png";
-import elevadorligado from "./elevador-ativado.png";
-import elevadoremchamas from "./elevador-em-chamas.png";
-import caboscortados from "./cabos-cortados.png";
-import cabosconectados from "./cabos-conectados.png";
-import problema from "./problema.png";
-import documento from "./document.png";
+// Home.jsx
+
+import React, { useState } from 'react';
+import './home.scss';
+import StatusButton from './StatusButton'; // Make sure this file exists
+import ElevatorStatus from './ElevatorStatus'; // Make sure this file exists
 
 const Home = () => {
-  const [status, setStatus] = useState("Off");
+  const [status, setStatus] = useState('Off');
   const [botaoAtivo, setBotaoAtivo] = useState(true);
   const [popupVisible, setPopupVisible] = useState(false);
-  const [elevadorStatus, setElevadorStatus] = useState("ligado");
-  const [listaEventosVisible, setListaEventosVisible] = useState(true);
-  const [valor1] = useState();
-  const [valor2] = useState();
-  const [metricasVisiveis, setMetricasVisiveis] = useState(false);
-  const [iconeProblemaVisivel, setIconeProblemaVisivel] = useState(false);
-  const [novoPopupVisivel, setNovoPopupVisivel] = useState(false);
-  const [iconeDocumento, setDocumento] = useState(false);
-  const [metricpopupVisible, setMetricPopupVisible] = useState(false);
-  const [exibirEmPorcentagem, setExibirEmPorcentagem] = useState(false);
-  const [documentoPopupVisible, setDocumentoPopupVisible] = useState(false);
 
   const toggleStatus = () => {
-    if (botaoAtivo) {
-      setStatus("On");
-      setBotaoAtivo(false);
-    }
-  };
-
-  const toggleElevadorStatus = () => {
-    if (elevadorStatus === "chamas") {
-      setElevadorStatus("caboscortados");
-    } else if (elevadorStatus === "caboscortados") {
-      setElevadorStatus("cabosconectados");
-    }
+    setStatus((currentStatus) => {
+      // If the current status is 'Off', we want to turn it 'On', and vice versa
+      return currentStatus === 'Off' ? 'On' : 'Off';
+    });
+  
+    // We will toggle 'botaoAtivo' regardless of the current state
+    // This means the button will always be clickable to switch between 'On' and 'Off'
+    setBotaoAtivo((currentActive) => !currentActive);
   };
 
   const openPopupWithElevadoremchamas = () => {
-    setElevadorStatus("chamas");
-    setPopupVisible(true);
-    setListaEventosVisible(false);
-    setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
-    setMetricasVisiveis(false);
-    setIconeProblemaVisivel(true);
-  };
-
-  const togglePopup = () => {
-    setPopupVisible(!popupVisible);
-    setMetricasVisiveis(true); // Exibe as métricas quando o popup é fechado
-    setIconeProblemaVisivel(true);
-
-    if (popupVisible) {
-      // Se o popup foi fechado, reexiba a lista de eventos
-      setListaEventosVisible(false);
+    if (status === 'On') { // Check if the status is 'On' before opening the popup
+      setPopupVisible(true);
+      // You might want to set other states here depending on your popup's requirements
     }
   };
 
-  useEffect(() => {
-    if (popupVisible) {
-      setMetricasVisiveis(false);
-      setIconeProblemaVisivel(false);
-      setListaEventosVisible(false);
-      setNovoPopupVisivel(false);
-    }
-  }, [popupVisible]);
-  const openPopupWithProblema = () => {
-    setNovoPopupVisivel(true);
-    setListaEventosVisible(false);
-    setBotaoAtivo(false); // Oculte permanentemente o botão "ON"
-    setMetricasVisiveis(false);
-    setIconeProblemaVisivel(false);
-  };
-  const fecharNovoPopup = () => {
-    setNovoPopupVisivel(false);
-    setMetricasVisiveis(true); // Reexibe as métricas
-    setDocumento(true);
-    setIconeProblemaVisivel(false);
-
-  };
-  const metricpopup = () => {
-    setMetricPopupVisible(true);
-    setIconeProblemaVisivel(false);
-
-  };
-  const fecharMetricPopup = () => {
-    setMetricPopupVisible(false);
-    setIconeProblemaVisivel(false);
-
-  };
-
-  const openDocumentoPopup = () => {
-    setDocumentoPopupVisible(true);
-  };
-  
   return (
     <div className="home">
       <div className="homeFContainer">
         <h1>Firefighters-sre</h1>
       </div>
-      {listaEventosVisible && (
-        <div className="listaevento">
-          <ListaEvento />
-        </div>
-      )}
-      <div className="status">
-        {botaoAtivo && (
-          <button
-            className="buttonStatus"
-            onClick={toggleStatus}
-            disabled={!botaoAtivo}
-          >
-            {botaoAtivo ? "OFF" : "ON"}
-          </button>
-        )}
-      </div>
-      <div>
-        <img
-          src={status === "Off" ? elevadordesativado : elevadorligado}
-          className="elevador"
-          onClick={openPopupWithElevadoremchamas}
-        />
-        {popupVisible && (
-          <div className="popup">
-            <img
-              src={
-                elevadorStatus === "chamas"
-                  ? elevadoremchamas
-                  : elevadorStatus === "caboscortados"
-                  ? caboscortados
-                  : cabosconectados
-              }
-              className="elevadoremchamas"
-              onClick={toggleElevadorStatus}
-            />
-            <button className="fecharPopup" onClick={togglePopup}>
-              Fechar
-            </button>
-          </div>
-        )}
-        {metricasVisiveis && (
-          <div className="metricas">
-            <div className="valor-box">
-              <span>Tempo: 50%</span>
-              <span>{valor1}</span>
-            </div>
-            <div className="valor-box">
-              <span>Disponibilidade: 60%</span>
-              <span>{valor2}</span>
-            </div>
-          </div>
-        )}
-        {iconeProblemaVisivel && (
-          <img
-            src={problema}
-            className="problema"
-            onClick={openPopupWithProblema}
-          />
-        )}
-        {novoPopupVisivel && (
-          <div className="novopopup">
-            <h2> Relatório Inicial de Incidente</h2>
-            Data: 21 de Outubro de 2023
-            <br />
-            Hora: 15:00 PM <br />
-            Local: Prédio Principal <br />
-            Notificado por: Sr. João Cardoso (Funcionário do Departamento de TI){" "}
-            <br />
-            Descrição do Incidente: <br />
-            A equipe de segurança foi alertada sobre uma inundação em um dos
-            andares do prédio. O sistema de alarme de inundação foi acionado às
-            08:15 AM, e as câmeras de segurança capturaram imagens de água
-            vazando de uma das caixas d'água no corredor central. <br />
-            Duas salas, denominadas ROXA e VERMELHA, foram as mais afetadas, com
-            água acumulando rapidamente no chão. Pouco tempo depois, as luzes
-            nestas salas começaram a piscar e um cheiro de queimado foi notado,
-            indicando um possível curto-circuito. <br />
-            Todos os funcionários no andar afetado foram evacuados imediatamente
-            e a energia foi desligada por precaução às 08:21 AM. <br />
-            <button onClick={fecharNovoPopup} className="fecharPopup">
-              Fechar
-            </button>
-          </div>
-        )}
-        {iconeDocumento && (
-          <img src={documento} className="documento" onClick={metricpopup} />
-        )}
-        {metricpopupVisible && ( // Condicional para exibir o metricpopup
-          <div className="metricpopup">
-            <h2>Tempo médio em cada local</h2>
-            <button onClick={() => setExibirEmPorcentagem(!exibirEmPorcentagem)}>
-              Alternar Exibição
-            </button>
-            <table>
-              <thead>
-                <tr>
-                  <td>Recepção:</td>
-                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Elevador:</td>
-                  <td>{exibirEmPorcentagem ? "30%" : "2 minutos"}</td>
-                </tr>
-                <tr>
-                  <td>Escritório: </td>
-                  <td>{exibirEmPorcentagem ? "95%" : "5 horas"}</td>
-                </tr>
-              </tbody>
-            </table>
-            <button onClick={fecharMetricPopup} className="fecharPopup">Fechar</button>
-          </div>
-        )}
-     {iconeDocumento && (
-  <img src={documento} className="documento" onClick={openDocumentoPopup} />
-)}
-{documentoPopupVisible && (
-            <div className="metricpopup">
-            <h2>Tempo médio em cada local</h2>
-            <button onClick={() => setExibirEmPorcentagem(!exibirEmPorcentagem)}>
-              Alternar Exibição
-            </button>
-            <table>
-              <thead>
-                <tr>
-                  <td>Recepção:</td>
-                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Elevador:</td>
-                  <td>{exibirEmPorcentagem ? "95%" : "30 segundos"}</td>
-                </tr>
-                <tr>
-                  <td>Escritório: </td>
-                  <td>{exibirEmPorcentagem ? "95%" : "5 horas"}</td>
-                </tr>
-              </tbody>
-            </table>
-            <button onClick={() => setDocumentoPopupVisible(false)}>Fechar</button>          </div>
-        )}
-      </div>
+      
+      <StatusButton isActive={botaoAtivo} status={status} toggleStatus={toggleStatus} />
+      <ElevatorStatus
+        status={status}
+        onElevatorClick={openPopupWithElevadoremchamas}
+      />
+      
+      {/* Other components and logic */}
     </div>
   );
 };

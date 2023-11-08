@@ -19,6 +19,20 @@ body {
   background-position-y: 400px;
 }
 
+@keyframes elevator-up-down {
+  0%, 100% {
+    transform: translateY(0); // Start and end at the original position
+  }
+  50% {
+    transform: translateY(270px); // Move up by 20 pixels
+  }
+}
+
+// Add this inside your .home block
+.elevador.on {
+  animation: elevator-up-down 20s ease-in-out infinite; // Apply the animation
+}
+
 .popup {
   position: relative ;
   left: 50%;
@@ -54,7 +68,7 @@ body {
 }.buttonStatus {
   margin-top: 200px;
   height: 30px;
-  width: 50px;
+  width: 80px;
   position: absolute;
   left: 55%;
   background-color: black;
