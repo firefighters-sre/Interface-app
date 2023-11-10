@@ -1,73 +1,99 @@
 .home {
   text-align: center;
+  position: relative; // Para posicionar elementos internos de forma absoluta
+  height: 100vh; // Altura total da janela
+  display: flex; // Usando flexbox
+  justify-content: center; // Centraliza horizontalmente
+  align-items: flex-end; // Alinha ao fundo
 }
 
-/* Background styles for the body, specific to this page */
-body {
-  background-image: url("../../assets/predio-elevador-pessoa.png");
-  background-repeat: no-repeat;
-  background-size: 300px;
-  background-position: center;
-  background-position-y: 400px;
+.title-container {
+  position: absolute;
+  top: 30%; // Center vertically
+  left: 50%; // Center horizontally
+  transform: translate(-50%, -200%); // Adjust for the button's dimensions
 }
 
-/* Elevator styles */
+.status-button-container {
+  position: absolute;
+  top: 50%; // Center vertically
+  left: 50%; // Center horizontally
+  transform: translate(-50%, -200%); // Adjust for the button's dimensions
+}
+
+.button-off {
+  background-color: red;
+  color: white;
+  // Add more styling as needed
+}
+
+.button-on {
+  background-color: green;
+  color: white;
+  // Add more styling as needed
+}
+
+/* Estilos do Prédio */
+.predio {
+  background-image: url('../../assets/predio-elevador-pessoa.png'); // Caminho correto para a imagem
+  background-size: cover; // Faz com que a imagem cubra toda a div
+  background-position: center; // Centraliza a imagem
+  height: 50vh; // Altura total da viewport
+  width: 10%;
+  position: relative; // Para posicionar o elevador em relação a esta div
+}
+
+/* Estilos do Elevador */
 .elevador {
-  width: 60px;
-  margin-top: 320px;
+  width: 5vh;
+  position: absolute; // Posicionamento absoluto dentro de .home
+  left: 50%; // Centraliza horizontalmente
+  bottom: 7vh; // Posiciona na parte inferior da div
+  transform: translateX(-50%); // Ajusta o posicionamento horizontal
 
   &.on {
-    animation: moveElevator 5s infinite alternate; // Adjust duration and type as needed
+    animation: moveElevator 15s infinite alternate;
   }
 }
 
 @keyframes moveElevator {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(270px); } // Adjust the distance as per your design
+  0% { bottom: 7vh; }
+  100% { bottom: 40vh; } // Eleva o elevador até 30% da altura da janela
 }
 
-/* Popup styles */
-.popup {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 2px solid #333; // Merged repeated border styles
-  padding: 5px;
-  border-radius: 10px;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
+// /* Estilos adicionais para outros elementos */
+// /* Popup styles */
+// .popup {
+//   position: relative;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   background-color: white;
+//   border: 2px solid #333; // Merged repeated border styles
+//   padding: 5px;
+//   border-radius: 10px;
+//   align-items: center;
+//   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+// }
 
-/* Styles for other elements */
-.listaevento, .metricas, .problema, .novopopup, .documento, .metricpopup {
-  width: 20%;
-  position: absolute;
-  right: 10%;
-}
+// /* Styles for other elements */
+// .listaevento, .metricas, .problema, .novopopup, .documento, .metricpopup {
+//   width: 20%;
+//   position: absolute;
+//   right: 10%;
+// }
 
-.metricas {
-  padding: 10px;
-  background-color: #e1e1e1;
-  position: fixed;
-  right: 30px;
-  bottom: 600px;
-}
+// .metricas {
+//   padding: 10px;
+//   background-color: #e1e1e1;
+//   position: fixed;
+//   right: 30px;
+//   bottom: 600px;
+// }
 
-.valor-box {
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-}
+// .valor-box {
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   background-color: #fff;
+// }
 
-.buttonStatus {
-  margin-top: 200px;
-  height: 30px;
-  width: 80px;
-  position: absolute;
-  left: 55%;
-  background-color: black;
-  color: white;
-}
-
-/* Further specific styles for each element can be added below */
+// /* Further specific styles for each element can be added below */

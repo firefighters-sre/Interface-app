@@ -14,14 +14,20 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="homeFContainer">
+
+      <div className="title-container">
         <h1>Firefighters-sre</h1>
       </div>
       
-      <StatusButton isActive={botaoAtivo} status={status} toggleStatus={toggleStatus} />
-      <Elevator status={status} />
+      <div className="status-button-container">
+        <StatusButton isActive={botaoAtivo} status={status} toggleStatus={toggleStatus} />
+      </div>
+
+      <div className="predio">
+        <Elevator status={status} />
+      </div>
       
-      {/* Other components and logic */}
+      {/* Outros componentes e lógica conforme necessário */}
     </div>
   );
 };
