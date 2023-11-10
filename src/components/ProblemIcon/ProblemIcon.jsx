@@ -1,7 +1,7 @@
 // ProblemIcon.jsx
 
 import React from 'react';
-import problema from './problema.png';
+import problema from '../../assets/problema.png';
 
 const ProblemIcon = ({ isVisible, onClick }) => {
   if (!isVisible) return null;

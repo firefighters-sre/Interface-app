@@ -1,7 +1,7 @@
 // DocumentIcon.jsx
 
 import React from 'react';
-import documento from './document.png';
+import documento from '../../assets/document.png';
 
 const DocumentIcon = ({ onClick }) => {
   return (
