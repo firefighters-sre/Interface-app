@@ -5,11 +5,12 @@
   display: flex; // Usando flexbox
   justify-content: center; // Centraliza horizontalmente
   align-items: flex-end; // Alinha ao fundo
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .title-container {
   position: absolute;
-  top: 30%; // Center vertically
+  top: 20%; // Center vertically
   left: 50%; // Center horizontally
   transform: translate(-50%, -200%); // Adjust for the button's dimensions
 }

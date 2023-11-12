@@ -16,7 +16,7 @@ const Home = () => {
     <div className="home">
 
       <div className="title-container">
-        <h1>Firefighters-sre</h1>
+        <h1 className="text-4xl font-bold text-black-800">Firefighters-sre</h1>
       </div>
       
       <div className="status-button-container">
