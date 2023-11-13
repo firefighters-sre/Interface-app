@@ -10,7 +10,7 @@ const StatusButton = ({ isActive, status, toggleStatus }) => {
 
   return (
     <button
-      className={`buttonStatus ${buttonClass} px-4 py-2 rounded focus:outline-none focus:ring`}
+      className={`${buttonClass} px-4 py-2 rounded focus:outline-none focus:ring`}
       onClick={toggleStatus}
       // disabled={!isActive} // Uncomment this line if you want to disable the button conditionally
     >

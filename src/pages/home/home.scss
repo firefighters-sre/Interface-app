@@ -8,6 +8,7 @@
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Estilos para o container do título */
 .title-container {
   position: absolute;
   top: 20%; // Center vertically
@@ -15,23 +16,12 @@
   transform: translate(-50%, -200%); // Adjust for the button's dimensions
 }
 
+/* Estilos para o container do botão de status */
 .status-button-container {
   position: absolute;
   top: 50%; // Center vertically
   left: 50%; // Center horizontally
   transform: translate(-50%, -200%); // Adjust for the button's dimensions
-}
-
-.button-off {
-  background-color: red;
-  color: white;
-  // Add more styling as needed
-}
-
-.button-on {
-  background-color: green;
-  color: white;
-  // Add more styling as needed
 }
 
 /* Estilos do Prédio */
@@ -57,6 +47,7 @@
   }
 }
 
+/* Define a animação de movimento do elevador */
 @keyframes moveElevator {
   0% { bottom: 7vh; }
   100% { bottom: 40vh; } // Eleva o elevador até 30% da altura da janela

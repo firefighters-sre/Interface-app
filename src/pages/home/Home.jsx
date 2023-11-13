@@ -6,20 +6,19 @@ import Elevator from '../../components/Elevator/Elevator';
 const Home = () => {
   const [status, setStatus] = useState('Off');
   const [botaoAtivo, setBotaoAtivo] = useState(true);
-
   const toggleStatus = () => {
     setStatus(currentStatus => currentStatus === 'Off' ? 'On' : 'Off');
     setBotaoAtivo(currentActive => !currentActive);
   };
 
   return (
-    <div className="home">
+    <div className="flex flex-col items-center justify-between min-h-screen text-center font-sans p-4">
 
-      <div className="title-container">
-        <h1 className="text-4xl font-bold text-black-800">Firefighters-sre</h1>
+      <div className="mt-8">
+        <h1 className="text-4xl font-bold text-gray-800">Firefighters-sre</h1>
       </div>
       
-      <div className="status-button-container">
+      <div className="mb-30">
         <StatusButton isActive={botaoAtivo} status={status} toggleStatus={toggleStatus} />
       </div>
 
@@ -27,7 +26,6 @@ const Home = () => {
         <Elevator status={status} />
       </div>
       
-      {/* Outros componentes e lógica conforme necessário */}
     </div>
   );
 };
